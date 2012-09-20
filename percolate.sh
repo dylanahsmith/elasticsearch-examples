@@ -26,7 +26,7 @@ curl -XGET localhost:9200/_percolator/_mapping?pretty=true
 
 # 2 requests to check if the doc matches the query
 
-curl -XPUT localhost:9200/_percolator/test/kuku?ttl=1000 -d '{
+curl -XPUT 'localhost:9200/_percolator/test/kuku?ttl=1000&refresh=true' -d '{
   "query": {
     "term": {
       "field1": "value1"
@@ -37,6 +37,12 @@ curl -XPUT localhost:9200/_percolator/test/kuku?ttl=1000 -d '{
 curl -XGET localhost:9200/test/type1/_percolate -d '{
   "doc" : {
     "field1" : "value1"
+  },
+  "query": {
+    "ids": {
+      "type": "test",
+      "values": ["kuku"]
+    }
   }
 }'
 
