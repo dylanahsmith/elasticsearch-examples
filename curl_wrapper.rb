@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-args = ['curl'] + ARGV
+args = ['curl', '-s'] + ARGV
 puts args.map { |arg|
   arg =~ / / ? "'#{arg}'" : arg
 }.join(" ")
